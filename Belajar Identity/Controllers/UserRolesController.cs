@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Dapper;
+using Belajar_Identity.Models;
 
 namespace Belajar_Identity.Views.UserRoles
 {
@@ -20,8 +22,8 @@ namespace Belajar_Identity.Views.UserRoles
 
         public async Task<ActionResult> GetDataUserRoles()
         {
-            var result = con.QueryAsync("EXEC SP_Retrieve_UserRoles");
-            return Json(new { data = result}, JsonRequestBehavior)
+            var result = await con.QueryAsync<UserRoleVM>("EXEC SP_Retrieve_UserRoles");
+            return Json(new { data = result }, JsonRequestBehavior.AllowGet);
         }
     }
 }

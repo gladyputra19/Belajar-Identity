@@ -19,16 +19,20 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">×</button>
-                <h4 class="modal-title" id="myModalLabel">Role Form</h4>
+                <h4 class="modal-title" id="myModalLabel">UserRole Form</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label for="Id">Id</label>
-                    <input type="text" class="form-control" id="RoleIdText" placeholder="Id" />
+                    <input type="text" class="form-control" id="UserRoleIdText" placeholder="Id" />
                 </div>
                 <div class="form-group">
-                    <label for="Name">Name</label>
-                    <input type="text" id="RoleNameText" class="form-control" placeholder="Name">
+                    <label for="Name">UserId</label>
+                    <input type="text" id="UserIdText" class="form-control" placeholder="UserId">
+                </div>
+                <div class="form-group">
+                    <label for="RoleId">RoleId</label>
+                    <input type="text" id="RoleNIdText" class="form-control" placeholder="RoleId">
                 </div>
             </div>
             <div class="modal-footer">
@@ -45,4 +49,24 @@
     <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="https://kit.fontawesome.com/2248d5bdb1.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $("#table").DataTable({
+                "ajax": {
+                    "url": "/UserRoles/GetDataUserRoles",
+                    "type": "GET",
+                    "dataType": "json"
+                },
+                "columns": [
+                    { "data": "UserName" },
+                    { "data": "UserRole" },
+                    {
+                        "render": function (data, type, row) {
+                            return "<a class = 'btn btn-warning'><i class = 'fa fa-pencil'></i></a> &nbsp <a class = 'btn btn-danger'><i class='fa fa-trash-alt'></i></a>";
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
 }
